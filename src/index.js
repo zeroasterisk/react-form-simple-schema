@@ -5,13 +5,8 @@
  * https://github.com/christianalfoni/formsy-react
  */
 import React from 'react';
-import * as FormBuilder from './form-builder';
-import * as FormValidator from './form-validator';
-
-export const FormSimpleSchema = {
-  FormBuilder: FormBuilder,
-  FormValidator: FormValidator,
-};
+import './QuickForm';
+import './QuickInput';
 
 /*
 // automatic form for entire schema

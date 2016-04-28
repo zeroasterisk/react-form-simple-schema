@@ -31,9 +31,9 @@ https://github.com/zeroasterisk/react-form-simple-schema
 npm install --save react-form-simple-schema
 ```
 
-### Usage
+### Usage From Meteor v1.3+
 
-See more in stories.
+See more in [stories](./src/stories).
 
 ----
 
