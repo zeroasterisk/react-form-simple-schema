@@ -1,27 +1,34 @@
+/**
+ * Tools to use Meteor's
+ * https://github.com/aldeed/meteor-simple-schema/
+ * to
+ * https://github.com/christianalfoni/formsy-react
+ */
 import React from 'react';
+import * as FormBuilder from './form-builder';
+import * as FormValidator from './form-validator';
 
-const buttonStyles = {
-  border: '1px solid #eee',
-  borderRadius: 3,
-  backgroundColor: '#FFFFFF',
-  cursor: 'pointer',
-  fontSize: 15,
-  padding: '3px 10px',
+export const FormSimpleSchema = {
+  FormBuilder: FormBuilder,
+  FormValidator: FormValidator,
 };
 
-const Button = ({ children, onClick, style = {} }) => (
-  <button
+/*
+// automatic form for entire schema
+const QuickForm = ({ children, onSubmit, style = {} }) => (
+  <Formsy
     style={{ ...buttonStyles, ...style }}
     onClick={onClick}
   >
     {children}
-  </button>
+  </QuickForm>
 );
 
-Button.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func,
+QuickForm.propTypes = {
+  schema: React.PropTypes.object.isRequired,
+  onSubmit: React.PropTypes.func,
   style: React.PropTypes.object,
 };
 
-export default Button;
+export default QuickForm;
+*/
