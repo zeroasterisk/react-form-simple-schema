@@ -71,6 +71,12 @@ export default class QuickForm extends React.Component {
 
 QuickForm.propTypes = {
   schema: React.PropTypes.object,
-  fields: React.PropTypes.object,
-  omitFields: React.PropTypes.object,
+  fields: React.PropTypes.oneOfType(
+    React.PropTypes.array,
+    React.PropTypes.string,
+  ),
+  omitFields: React.PropTypes.oneOfType(
+    React.PropTypes.array,
+    React.PropTypes.string,
+  ),
 };

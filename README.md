@@ -2,13 +2,22 @@
 
 This is a *(currently draft)* Form Builder and Validator package for
 [React](https://facebook.github.io/react/)
-which uses a schema from
-[Simple Schema](https://atmospherejs.com/aldeed/simple-schema)
-*(for Meteor)*
-to build a form *(optionally)*
-and validate a form *(optionally)*
+using
+[formsy](https://github.com/christianalfoni/formsy-react) &
+[formsy-react-components](https://github.com/twisty/formsy-react-components)
+*(bootstrap)*.
+
+This should be a bridge for
+[Meteor](https://meteor.com)
+developers who use
+[Simple Schema](https://atmospherejs.com/aldeed/simple-schema).
+
+The package should *optionally* build a form *optionally* and validate a form
 similar to *(a subset of)*
 [Autoform](https://github.com/aldeed/meteor-autoform)
+(built on top of Simple Schema)
+
+### Demo / Example
 
 You can view the results thanks to
 [React Storybook](https://github.com/kadirahq/react-storybook)
@@ -18,7 +27,58 @@ https://github.com/zeroasterisk/react-form-simple-schema
 
 ### Install
 
+```
+npm install --save react-form-simple-schema
+```
+
 ### Usage
+
+See more in stories.
+
+----
+
+You must pass down the `simple-schema` schema `object` to the
+React Component in the
+[container](http://guide.meteor.com/react.html#using-createContainer)
+
+```js
+import { Meteor } from 'meteor/meteor';
+import { Lists } from '../../api/lists/lists.js';
+import { createContainer } from 'meteor/react-meteor-data';
+import ListPage from '../pages/ListPage.js';
+
+export default createContainer(({ params }) => {
+  const { id } = params;
+  const todosHandle = Meteor.subscribe('todos.inList', id);
+  const loading = !todosHandle.ready();
+  const list = Lists.findOne(id);
+  const listExists = !loading && !!list;
+  const listSchema = Lists.schema();
+  return {
+    loading,
+    list,
+    listExists,
+    todos: listExists ? list.todos().fetch() : [],
+    listSchema
+  };
+```
+
+Then you can use the schema object in your Component.
+
+```js
+    <QuickForm
+      schema={this.props.listSchema}
+      onValidSubmit={action('onValidSubmit')}
+      onValid={action('onValid')}
+      onInvalid={action('onInvalid')}
+      fields="name,email"
+    />
+```
+
+*NOTE:* you can also pass in just a object which simulates the properties of
+a `simple-schema` schema, or the properties of
+[formsy-react-components](https://github.com/twisty/formsy-react-components)
+*(which is what we translate simple schema into)*
 
 ### Contribute
 
@@ -27,6 +87,8 @@ https://github.com/zeroasterisk/react-form-simple-schema
 Send me **pull requests** with fixes, features, stories, etc.
 
 You can also send issues, etc.  *(Ideally, communicate with a story in storybook and PR)*
+
+see [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ### TODO / Roadmap
 
