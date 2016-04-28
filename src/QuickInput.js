@@ -12,6 +12,9 @@ export default class QuickInput extends React.Component {
   }
   disable() {
   }
+  changeOnBlur(e) {
+    return true;
+  }
   canSubmit() {
     return true;
   }
