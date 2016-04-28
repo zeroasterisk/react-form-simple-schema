@@ -1,12 +1,14 @@
 # React Form Simple Schema Component
 
 This is a *(currently draft)* Form Builder and Validator package for
-React
+[React](https://facebook.github.io/react/)
 which uses a schema from
-Simple Schema
+[Simple Schema](https://atmospherejs.com/aldeed/simple-schema)
 *(for Meteor)*
 to build a form *(optionally)*
 and validate a form *(optionally)*
+similar to *(a subset of)*
+[Autoform](https://github.com/aldeed/meteor-autoform)
 
 You can view the results thanks to
 [React Storybook](https://github.com/kadirahq/react-storybook)
@@ -35,7 +37,7 @@ You can also send issues, etc.  *(Ideally, communicate with a story in storybook
 - [ ] build complex forms, nested Array
 - [ ] build complex forms, nested Object
 - [ ] support some of the common options for AutoForm
- - [ ] support `omitFields` && `fields`
+ - [x] support `omitFields` && `fields`
 
 #### Consider
 
