@@ -5,8 +5,17 @@
  * https://github.com/christianalfoni/formsy-react
  */
 import React from 'react';
-import './QuickForm';
-import './QuickInput';
+import QuickFormModule from './QuickForm';
+import QuickInputModule from './QuickInput';
+
+export const QuickForm = QuickFormModule;
+export const QuickInput = QuickInputModule;
+
+const ReactFormSimpleSchema = {
+  QuickForm: QuickFormModule,
+  QuickInput: QuickInputModule,
+};
+export default ReactFormSimpleSchema;
 
 /*
 // automatic form for entire schema
