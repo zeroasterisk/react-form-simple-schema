@@ -6,43 +6,70 @@ const {Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea} 
 import QuickInput from './QuickInput';
 
 const csvToArray = (input) => {
+
   if (_.isString(input)) {
     return _.trim(input).split(',').map(_.trim);
   }
+
   if (_.isArray(input)) {
     return input.map(_.trim);
   }
-  // console.error('QuickForm.csvToArray invalid input', input);
-  // throw new Error('QuickForm.csvToArray invalid input');
+
   return [];
 };
 
 export default class QuickForm extends React.Component {
-  submit() {
-    console.log('submit');
+  constructor(props) {
+    super(props);
+
+    this.onValidSubmit = this.onValidSubmit.bind(this);
+    this.onValid = this.onValid.bind(this);
+    this.onInvalid = this.onInvalid.bind(this);
+
+    this.state = { canSubmit: (props.canSubmit || true) }; //defaulting to true
   }
+
+  onValidSubmit(model) {
+    this.props.onValidSubmit(model);
+  }
+
+  onValid() {
+    let { onValid } = this.props;
+
+    onValid
+      ? this.props.onValid()
+      : this.enableButton();
+  }
+
+  onInvalid() {
+    let { onInvalid } = this.props;
+
+    onInvalid
+      ? this.props.onInvalid()
+      : this.disableButton();
+  }
+
   enableButton() {
-    console.log('enableButton');
+    this.setState({ canSubmit: true });
   }
+
   disableButton() {
-    console.log('disableButton');
+    this.setState({ canSubmit: false })
   }
-  canSubmit() {
-    return true;
-  }
+
   buildFormInputs() {
     const schema = this.props.schema || false;
     if (!schema) return '';
     const omitFields = csvToArray(this.props.omitFields);
     const fields = csvToArray(this.props.fields);
-    return Object.keys(schema).map((field) => {
+    return Object.keys(schema).map((field, i) => {
       if (omitFields.length > 0 && _.indexOf(omitFields, field) !== -1) return '';
       if (fields.length > 0 && _.indexOf(fields, field) === -1) return '';
       const optionsPath = ['options', field].join('.');
       const options = _.result(this.props, optionsPath);
       return (
         <QuickInput
-          key={field}
+          key={i}
           field={field}
           schema={schema[field]}
           options={options}
@@ -51,16 +78,18 @@ export default class QuickForm extends React.Component {
     });
   }
   buildFormButtons() {
+    let { canSubmit } = this.state;
+
     return (
-      <button type="submit" disabled={!this.canSubmit()}>Submit</button>
+      <button type="submit" disabled={ !canSubmit }>Submit</button>
     );
   }
   render() {
     return (
       <Formsy.Form
-        onValidSubmit={this.submit}
-        onValid={this.enableButton}
-        onInvalid={this.disableButton}
+        onValidSubmit={this.onValidSubmit}
+        onValid={this.onValid}
+        onInvalid={this.onInvalid}
       >
         {this.buildFormInputs()}
         {this.buildFormButtons()}
@@ -73,10 +102,14 @@ QuickForm.propTypes = {
   schema: React.PropTypes.object,
   fields: React.PropTypes.oneOfType(
     React.PropTypes.array,
-    React.PropTypes.string,
+    React.PropTypes.string
   ),
   omitFields: React.PropTypes.oneOfType(
     React.PropTypes.array,
     React.PropTypes.string,
   ),
+  onValidSubmit: React.PropTypes.func,
+  onValid: React.PropTypes.func,
+  onInvalid: React.PropTypes.func,
+  canSubmit: React.PropTypes.bool
 };

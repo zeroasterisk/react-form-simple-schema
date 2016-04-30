@@ -6,6 +6,16 @@ import QuickForm from '../QuickForm';
 require("!style!css!less!bootstrap/less/bootstrap.less");
 
 storiesOf('QuickForm Basic', module)
+  .add('just 2 parts of an object', () => (
+    <QuickForm
+      schema={MyRequestOrgSchema}
+      onValidSubmit={action('onValidSubmit')}
+      onValid={action('onValid')}
+      onInvalid={action('onInvalid')}
+      canSubmit={ true }
+      fields={['address.street','address.postalCode']}
+    />
+  ))
   .add('fields as string: only name and email', () => (
     <QuickForm
       schema={MyRequestOrgSchema}
