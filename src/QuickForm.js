@@ -4,6 +4,7 @@ import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 const {Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea} = FRC;
 import QuickInput from './QuickInput';
+import SchemaTranslator from './schema-translator';
 
 const csvToArray = (input) => {
 
@@ -100,14 +101,14 @@ export default class QuickForm extends React.Component {
 
 QuickForm.propTypes = {
   schema: React.PropTypes.object,
-  fields: React.PropTypes.oneOfType(
-    React.PropTypes.array,
-    React.PropTypes.string
-  ),
-  omitFields: React.PropTypes.oneOfType(
+  fields: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.string,
-  ),
+  ]),
+  omitFields: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.string,
+  ]),
   onValidSubmit: React.PropTypes.func,
   onValid: React.PropTypes.func,
   onInvalid: React.PropTypes.func,

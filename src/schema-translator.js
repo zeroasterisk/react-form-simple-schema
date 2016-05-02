@@ -144,6 +144,41 @@ export function forInput(schemaInput, field, options) {
 }
 
 /**
+ * Get the schema for an entire form (all fields & validator functions)
+ *
+ * SchemaTranslator.forForm(this.props.schema) => {
+ *   schema: {}, validateOne: Function, validate; Function
+ * }
+ *
+ * @param object schemaInput (full object or schema)
+ * @return object schemaBundle properties schema, validate, validateOne
+ */
+export function forForm(schemaInput) {
+  console.log('forForm', schemaInput);
+  let schema = {};
+  let context = {};
+  let validate = () => { console.log('forInput validate function not supported'); };
+  let validateOne = () => { console.log('forInput validateOne function not supported'); };
+  if (schemaInput._schema) {
+    // passed in a whole SimpleSchema document (recommended)
+    schema = schemaInput._schema;
+    context = schemaInput.newContext();
+    validate = context.validate; // validate(obj, options) --> boolean isValid
+    validateOne = context.validateOne; // validateOne(obj, key, options) --> boolean isValid
+  } else if (_.isObject(schemaInput)) {
+    // passed in only a schema object (sorta supported)
+    schema = schemaInput;
+    // TODO link to formsy validation
+  }
+  return {
+    schema: schema,
+    context: context,
+    validate: validate,
+    validateOne: validateOne,
+  };
+}
+
+/**
  * Get any value (or resolve a function value)
  *
  * SchemaTranslator.get(schema, 'email.type', 'email') === 'email'
@@ -161,6 +196,7 @@ export function get(schema, path, defaultValue) {
 
 let SchemaTranslator = {
   forInput: forInput,
+  forForm: forForm,
   mergeInAutoform: mergeInAutoform,
   // resolve functions to values
   resolve: resolve,
