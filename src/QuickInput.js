@@ -30,13 +30,17 @@ export default class QuickInput extends React.Component {
     //console.log('QuickInput, props', this.props);
     let field = this.props.field || this.props.key;
     if (!field) {
-      console.error('QuickInput, SKIPPING has no field/key', this.props);
+      //console.error('QuickInput, SKIPPING has no field/key', this.props);
       return '';
     }
 
-    console.log('QuickInput', field, 'schema input', this.props.schema);
+    //console.log('QuickInput', field, 'schema input', this.props.schema);
+    if (this.props.schema.type === Object) {
+        //console.log("skip object / later could make fieldset?");
+        return null
+    }
     let schema = SchemaTranslator.forInput(this.props.schema, field);
-    console.log('QuickInput', field, 'schema after cleanup', schema);
+    //console.log('QuickInput', field, 'schema after cleanup', schema);
 
     // TODO split on various input types
     // TODO translate schema fields into formsy-react-components properties
@@ -60,7 +64,6 @@ export default class QuickInput extends React.Component {
 QuickInput.propTypes = {
   schema: React.PropTypes.object,
   field: React.PropTypes.string,
-  key: React.PropTypes.string,
   options: React.PropTypes.object,
 };
 

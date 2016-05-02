@@ -109,6 +109,3 @@ see [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 Thanks to [react-cdk](https://github.com/kadirahq/react-cdk) for a great
 boilerplate for a React component.
-
-
-
