@@ -1,6 +1,29 @@
-# React Form Simple Schema Component
+# ABANDONED
 
-This is a *(currently draft)* Form Builder and Validator package for
+I highly recommend you try out [uniforms](https://github.com/vazco/uniforms).
+
+* **Automatic forms generation**
+* **Fields capable of rendering every schema**
+* **Helper for creating custom fields with one line**
+* **Inline and asynchronous form validation**
+* **Integrations with various schemas:**
+    * **[GraphQL](https://github.com/graphql/graphql-js)**
+    * **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
+    * **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
+    * **And any other - only [a small wrapper](https://github.com/vazco/uniforms/blob/master/INTRODUCTION.md#schemas) is needed!**
+* **Wide range of themes:**
+    * **[AntD](https://ant.design/) theme**
+    * **[Bootstrap3](http://getbootstrap.com/) theme**
+    * **[Bootstrap4](http://v4-alpha.getbootstrap.com/) theme**
+    * **[Material UI](http://www.material-ui.com/) theme**
+    * **[Semantic UI](http://semantic-ui.com/) theme**
+    * **plain HTML theme**
+
+-------
+
+# React Form Simple Schema Component (LEGACY)
+
+This is a *(DEPRECATED EXPERIMENT)* Form Builder and Validator package for
 [React](https://facebook.github.io/react/)
 using
 [formsy](https://github.com/christianalfoni/formsy-react) &
